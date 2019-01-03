@@ -6,11 +6,11 @@ spring:
   kafka:
     properties:
           request.timeout.ms: 400000
-    bootstrap-servers: 192.168.43.40:9092
-      consumer:
+    bootstrap-servers: localhost:9092
+    consumer:
       auto-offset-reset: latest
       enable-auto-commit: true
       auto-commit-interval: 100
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      group-id: test-consumer-group
+      group-id: test

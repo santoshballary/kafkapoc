@@ -7,6 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableEurekaClient
 @EnableFeignClients("com.itc.consumer.feignclients")
+@SpringBootApplication
 public class KafkaconsumerApplication {
 
 	public static void main(String[] args) {

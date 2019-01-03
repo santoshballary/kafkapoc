@@ -1,9 +1,8 @@
 package com.itc.consumer.consumer;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itc.consumer.feignclients.TestClient;
-import com.itc.consumer.models.Test;
+import com.itc.consumer.models.Record;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -14,7 +13,6 @@ import java.util.Optional;
 @Component
 public class Consumer {
 
-    private static Gson gson = new GsonBuilder().create();
 
     @Autowired
     private TestClient testClient;
@@ -23,13 +21,19 @@ public class Consumer {
     public void listen(ConsumerRecord<?, ?> record)throws Exception{
 
         Optional<?> kafkaMessage = Optional.ofNullable(record.value());
+        ObjectMapper mapper = new ObjectMapper();
 
         if (kafkaMessage.isPresent()) {
 
             Object message = kafkaMessage.get();
-            System.out.println("---->"+message);
-            Test test = gson.fromJson(message.toString(), Test.class);
-            testClient.post(test);
+            Record r =  mapper.readValue(message.toString()
+                    .replace("Struct","").replaceAll("}","\"}")
+                    .replaceAll("\\{","{\"")
+                    .replaceAll("=","\"=\"")
+                    .replaceAll(",","\",\"")
+                    .replaceAll("=",":"), Record.class);
+            System.out.println("record = [" + r.toString() + "]");
+            testClient.post(r);
         }
 
     }
