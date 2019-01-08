@@ -2,13 +2,13 @@ package com.itc.dbservice.services;
 
 import com.itc.dbservice.models.SccVariables;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by hexad3cimal on 1/3/19.
  */
 public interface SccVariablesService {
 
-    Collection<SccVariables> getSccVariablesList()throws Exception;
+    List<SccVariables> getSccVariablesList()throws Exception;
 
 }

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by hexad3cimal on 1/3/19.
@@ -20,7 +20,7 @@ public class SccVariablesServiceImpl implements SccVariablesService {
     private SccVariablesDao sccVariablesDao;
 
     @Override
-    public Collection<SccVariables> getSccVariablesList() throws Exception {
+    public List<SccVariables> getSccVariablesList() throws Exception {
         return sccVariablesDao.getSccVariablesList();
     }
 }
