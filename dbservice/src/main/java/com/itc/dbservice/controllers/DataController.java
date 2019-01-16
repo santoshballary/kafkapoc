@@ -80,9 +80,11 @@ public class DataController {
                         PersFisicaUk p = persFisicaUk.get(0);
                         String accountNo = accNos.get(0).trim();
                         String salutation = "";
-                        if(p.getE0476SexoPer() == 'V'){
+                        if(p.getE0476SexoPer().toString().trim().equalsIgnoreCase("V")){
 
                             salutation = "MR ";
+                        }else{
+                            salutation = "MRS ";
                         }
                         accountNo = addZeros(9 - accountNo.length(), accountNo);
                         StringBuilder recordString = new StringBuilder();
